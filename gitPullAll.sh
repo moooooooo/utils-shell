@@ -15,6 +15,7 @@ do
         echo "Fetching remote $r ok\n"
         # Note this is specifically for me.
         # pulling upstream master will probably mean you need to do a push.
+        # also need to add in DEV as that's where i usually branch
         case $r in 
             upstream)  
                 git fetch $r
@@ -23,8 +24,8 @@ do
                 echo "|   '-'   '-'   '-'   '-'   '-'   $r master                '-'   '-'  "
                 echo "+----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+--->"
                 echo ""
-                git pull $r main
                 git pull $r master
+                git pull $r main
                 ;;
             *)
                 git fetch $r
