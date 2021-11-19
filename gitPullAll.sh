@@ -5,7 +5,7 @@ BASEDIR2=${HOME}/go/src
 # echo "\nUpdating projects in ${BASEDIR}\n"
 BASEDIRS="$BASEDIR $BASEDIR2"
 
-for f in $(find ${BASEDIRS} -type d -name '\.git')
+for f in $(find -L ${BASEDIRS} -type d -name '\.git')
 do
     cd ${f}/..
     PWD=`pwd`
