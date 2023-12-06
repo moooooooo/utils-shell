@@ -62,6 +62,7 @@ args=(
   # --------------------------------------------------------------------------------
   # Peter - test img 
   # --------------------------------------------------------------------------------
+  # change to 6 if using emily
   # -drive id=MacHDDPtr,if=none,file="/home/peter/src/mac_hdd_peter.img",format=qcow2
   # -device ide-hd,bus=sata.5,drive=MacHDDPtr
   # end peter test
@@ -71,7 +72,14 @@ args=(
   # -drive id=Spinning,if=none,file="/dev/sda2",format=raw
   # end emily hdd
   # --------------------------------------------------------------------------------
+  # Peter Seagate usb hdd
+  # change to 6 if using emily
+  -device ide-hd,bus=sata.5,drive=pm-TimeMachine
+  -drive id=pm-TimeMachine,if=none,file="/dev/sdd2",format=raw
+  # end Seagate usb hdd
+  # --------------------------------------------------------------------------------
   # Peter - Windows disk
+  # change to 6 if using emily
   # -device ide-hd,bus=sata.5,drive=Windows
   # -drive id=Windows,if=none,file="/dev/sdc",format=raw
   # end Windows disk
