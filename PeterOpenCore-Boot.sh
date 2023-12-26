@@ -51,7 +51,8 @@ args=(
   -drive if=pflash,format=raw,readonly=on,file="$REPO_PATH/$OVMF_DIR/OVMF_CODE.fd"
   -drive if=pflash,format=raw,file="$REPO_PATH/$OVMF_DIR/OVMF_VARS-1920x1080.fd"
   -smbios type=2
-  -device ich9-intel-hda -device hda-duplex
+  -device ich9-intel-hda 
+  -device hda-duplex
   -device ich9-ahci,id=sata
   -drive id=OpenCoreBoot,if=none,snapshot=on,format=qcow2,file="$REPO_PATH/OpenCore/OpenCore.qcow2"
   -device ide-hd,bus=sata.2,drive=OpenCoreBoot
@@ -74,9 +75,13 @@ args=(
   # --------------------------------------------------------------------------------
   # Peter Seagate usb hdd
   # change to 6 if using emily
-  -device ide-hd,bus=sata.5,drive=pm-TimeMachine
-  -drive id=pm-TimeMachine,if=none,file="/dev/sdd2",format=raw
+  # -device ide-hd,bus=sata.5,drive=pm-TimeMachine
+  # -drive id=pm-TimeMachine,if=none,file="/dev/sdd1",format=raw
   # end Seagate usb hdd
+  # --------------------------------------------------------------------------------
+  # Peter sonoma tst
+  # -drive id=SonomaHDD,if=none,file="/mnt/apple/pm-sonoma.img",format=qcow2
+  # -device ide-hd,bus=sata.5,drive=SonomaHDD
   # --------------------------------------------------------------------------------
   # Peter - Windows disk
   # change to 6 if using emily
@@ -88,8 +93,33 @@ args=(
   -netdev user,id=net0 -device vmxnet3,netdev=net0,id=net0,mac=52:54:00:c9:18:27
   # -netdev user,id=net0 -device virtio-net-pci,netdev=net0,id=net0,mac=52:54:00:c9:18:27
   # -netdev user,id=net0 -device vmxnet3,netdev=net0,id=net0,mac=52:54:00:c9:18:27  # Note: Use this line for High Sierra
-  -monitor stdio
-  -device vmware-svga,vgamem_mb=64
+  # next 2 commented out Peter Dec 13th, 2023
+  # -monitor stdio
+  # -device vmware-svga,vgamem_mb=64
+  # my nVidia 2nd card for VGA PAssthrough
+  # get id's by running:
+  # lspci -nn | grep "VGA\|Audio"
+  # 04:00.0 VGA compatible controller [0300]: NVIDIA Corporation GT218 [GeForce 210] [10de:0a65] (rev a2)
+  # The first value (04:00.0) is the BDF ID, and the last (10de:0a65) is the Device ID. Cards with a built-in audio controller have to be passed together, so note the IDs for both subdevices.
+  # -------------------------------------------------------------------------
+  # -vga std \
+  #  -device pcie-root-port,bus=pcie.0,multifunction=on,port=1,chassis=1,id=port.1 \
+  #  -device vfio-pci,host=04:00.0,bus=port.1,multifunction=on \
+    # -device vfio-pci,host=04:00.0,bus=port.1,multifunction=on,romfile=/path/to/card.rom \
+  #  -device vfio-pci,host=04:00.1,bus=port.1 \
+  # -------------------------------------------------------------------------
+  # -vga qxl 
+  #  -device pcie-root-port,bus=pcie.0,multifunction=on,port=1,chassis=1,id=port.1 \
+  #  -device vfio-pci,host=26:00.0,bus=port.1,multifunction=on,romfile=/path/to/card.rom \
+  #  -device vfio-pci,host=26:00.1,bus=port.1 \
+  # from the boot-passthrough.sh script
+  # -device vfio-pci,host=04:00.0,multifunction=on,romfile="$REPO_PATH/my-nvidia.rom"
+  -vga qxl 
+  -device pcie-root-port,bus=pcie.0,multifunction=on,port=1,chassis=1,id=port.1 
+  -device vfio-pci,host=04:00.0,bus=port.1,multifunction=on,romfile="$REPO_PATH/my-nvidia.rom"
+  -device vfio-pci,host=04:00.1,bus=port.1
+	# -vnc 0.0.0.0:1,password -k en-us
+	# -vnc 0.0.0.0:1 -k en-us
 )
 
 qemu-system-x86_64 "${args[@]}"
