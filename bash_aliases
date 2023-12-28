@@ -21,6 +21,6 @@ alias gp="git push"
 alias duh='du -hs .[^.]* *| sort -h'
 alias hh="history | grep -i "
 alias dm="dmesg -T"
-# alias q="cd /home/peter/src/github/macOS-Simple-KVM"
+# alias q="cd $HOME/src/github/macOS-Simple-KVM"
 alias q="cd $HOME/src/github/OSX-KVM"
 alias pp="rm $HOME/.config/pulse/*;pulseaudio -k"
