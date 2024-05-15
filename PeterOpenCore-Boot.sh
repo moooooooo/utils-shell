@@ -39,10 +39,10 @@ args=(
   -machine ubuntu-q35
   -usb -device usb-kbd -device usb-tablet
   -smp "$CPU_THREADS",cores="$CPU_CORES",sockets="$CPU_SOCKETS"
-  -device usb-ehci,id=ehci
+  # -device usb-ehci,id=ehci
   # -device usb-kbd,bus=ehci.0
   # -device usb-mouse,bus=ehci.0
-  -device nec-usb-xhci,id=xhci
+  # -device nec-usb-xhci,id=xhci
   -global nec-usb-xhci.msi=off
   -global ICH9-LPC.acpi-pci-hotplug-with-bridge-support=off
   # -device usb-host,vendorid=0x8086,productid=0x0808  # 2 USD USB Sound Card
@@ -51,8 +51,8 @@ args=(
   -drive if=pflash,format=raw,readonly=on,file="$REPO_PATH/$OVMF_DIR/OVMF_CODE.fd"
   -drive if=pflash,format=raw,file="$REPO_PATH/$OVMF_DIR/OVMF_VARS-1920x1080.fd"
   -smbios type=2
-  -device ich9-intel-hda 
-  -device hda-duplex
+  # -device ich9-intel-hda 
+  # -device hda-duplex
   -device ich9-ahci,id=sata
   -drive id=OpenCoreBoot,if=none,snapshot=on,format=qcow2,file="$REPO_PATH/OpenCore/OpenCore.qcow2"
   -device ide-hd,bus=sata.2,drive=OpenCoreBoot
@@ -90,7 +90,7 @@ args=(
   # end Windows disk
   # --------------------------------------------------------------------------------
   # -netdev tap,id=net0,ifname=tap0,script=no,downscript=no -device virtio-net-pci,netdev=net0,id=net0,mac=52:54:00:c9:18:27
-  -netdev user,id=net0 -device vmxnet3,netdev=net0,id=net0,mac=52:54:00:c9:18:27
+  # -netdev user,id=net0 -device vmxnet3,netdev=net0,id=net0,mac=52:54:00:c9:18:27
   # -netdev user,id=net0 -device virtio-net-pci,netdev=net0,id=net0,mac=52:54:00:c9:18:27
   # -netdev user,id=net0 -device vmxnet3,netdev=net0,id=net0,mac=52:54:00:c9:18:27  # Note: Use this line for High Sierra
   # next 2 commented out Peter Dec 13th, 2023
@@ -114,10 +114,40 @@ args=(
   #  -device vfio-pci,host=26:00.1,bus=port.1 \
   # from the boot-passthrough.sh script
   # -device vfio-pci,host=04:00.0,multifunction=on,romfile="$REPO_PATH/my-nvidia.rom"
-  -vga qxl 
-  -device pcie-root-port,bus=pcie.0,multifunction=on,port=1,chassis=1,id=port.1 
-  -device vfio-pci,host=04:00.0,bus=port.1,multifunction=on,romfile="$REPO_PATH/my-nvidia.rom"
+  # -audiodev '{"id":"audio1","driver":"spice"}' 
+  # -spice port=5900,addr=127.0.0.1,disable-ticketing=on,image-compression=off,seamless-migration=on 
+  # -vga qxl 
+ 
+ -device qxl-vga,id=video0,ram_size=67108864,vram_size=67108864,vram64_size_mb=64,vgamem_mb=64,max_outputs=1,bus=pcie.0 \
+  -device pcie-root-port,bus=pcie.0,multifunction=on,port=1,chassis=1,id=port.1
+  -device vfio-pci,host=04:00.0,bus=port.1,multifunction=on
   -device vfio-pci,host=04:00.1,bus=port.1
+
+
+  
+  # -device qxl-vga,id=video0,ram_size=67108864,vram_size=67108864,vram64_size_mb=0,vgamem_mb=16,max_outputs=1,bus=pcie.0 \
+  # -device ich9-intel-hda,id=sound0,bus=pcie.0,addr=0x1b \
+  # -device hda-duplex,id=sound0-codec0,bus=sound0.0,cad=0,audiodev=audio1 \
+  # -chardev spicevmc,id=charredir0,name=usbredir \
+  # -device usb-redir,chardev=charredir0,id=redir0,bus=usb.0,port=2 \
+  # -chardev spicevmc,id=charredir1,name=usbredir \
+  # -device usb-redir,chardev=charredir1,id=redir1,bus=usb.0,port=3 \
+  # -device vfio-pci,host=0000:04:00.0,id=hostdev0,bus=pci.5,addr=0x0 \
+  # -device vfio-pci,host=0000:04:00.1,id=hostdev1,bus=pci.6,addr=0x0 \
+
+
+
+
+  # next is NIC
+  # <!-- 0000:05:00:0 Realtek Semiconductor Co., Ltd. RTL8111/8168/8411 PCI Express Gigabit Ethernet Controller-->
+  #  <hostdev mode="subsystem" type="pci" managed="yes">
+  #    <source>
+  #      <address domain="0x0000" bus="0x05" slot="0x00" function="0x0"/>
+  #    </source>
+  #    <address type="pci" domain="0x0000" bus="0x09" slot="0x00" function="0x0"/>
+  #  </hostdev>
+  #  <!-- end NIC block -->
+  -netdev user,id=net0 -device vmxnet3,netdev=net0,id=net0,  
 	# -vnc 0.0.0.0:1,password -k en-us
 	# -vnc 0.0.0.0:1 -k en-us
 )
