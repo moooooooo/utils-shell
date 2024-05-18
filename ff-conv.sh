@@ -4,7 +4,8 @@
 #
 #
 #
-# this works
+# this works - it will copy the metadata over as you'd hope it would
+# see commens further below
 for i in  ~/Music/zzz/a_positive_life/synaesthetic/*.ogg; do ./ffmpeg.exe  -stats -i "$i"  -map_metadata 0:s:0 -acodec alac "${i%.*}.m4a"; done
 
 # probe it:
