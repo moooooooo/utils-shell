@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# change these to where your source is.
 BASEDIR=${HOME}/src/github
 BASEDIR2=${HOME}/go/src
 # echo "\nUpdating projects in ${BASEDIR}\n"
