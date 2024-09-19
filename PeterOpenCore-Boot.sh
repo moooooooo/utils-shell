@@ -58,8 +58,10 @@ args=(
   -device ide-hd,bus=sata.2,drive=OpenCoreBoot
   -device ide-hd,bus=sata.3,drive=InstallMedia
   -drive id=InstallMedia,if=none,file="$REPO_PATH/BaseSystem.img",format=raw
-  -drive id=MacHDD,if=none,file="$REPO_PATH/mac_hdd_ng.img",format=qcow2
-  -device ide-hd,bus=sata.4,drive=MacHDD
+  -drive id=MacHDDNew,if=none,file="$REPO_PATH/mac_hdd_ng.img",format=qcow2
+  # -drive id=PeterHDD,if=none,file="/mnt/apple/2023-12-10-Ventura/OSX-KVM/mac_hdd_ng.img",format=qcow2
+  -device ide-hd,bus=sata.4,drive=MacHDDNew
+  # -device ide-hd,bus=sata.5,drive=PeterHDD
   # --------------------------------------------------------------------------------
   # Peter - test img 
   # --------------------------------------------------------------------------------
@@ -108,23 +110,22 @@ args=(
     # -device vfio-pci,host=04:00.0,bus=port.1,multifunction=on,romfile=/path/to/card.rom \
   #  -device vfio-pci,host=04:00.1,bus=port.1 \
   # -------------------------------------------------------------------------
-  # -vga qxl 
+   -vga qxl 
   #  -device pcie-root-port,bus=pcie.0,multifunction=on,port=1,chassis=1,id=port.1 \
-  #  -device vfio-pci,host=26:00.0,bus=port.1,multifunction=on,romfile=/path/to/card.rom \
-  #  -device vfio-pci,host=26:00.1,bus=port.1 \
+  #  # -device vfio-pci,host=26:00.0,bus=port.1,multifunction=on,romfile=/path/to/card.rom \
+  #  -device vfio-pci,host=18:00.0,bus=port.1,multifunction=on \
+  #  -device vfio-pci,host=18:00.1,bus=port.1 \
   # from the boot-passthrough.sh script
   # -device vfio-pci,host=04:00.0,multifunction=on,romfile="$REPO_PATH/my-nvidia.rom"
   # -audiodev '{"id":"audio1","driver":"spice"}' 
   # -spice port=5900,addr=127.0.0.1,disable-ticketing=on,image-compression=off,seamless-migration=on 
   # -vga qxl 
- 
- -device qxl-vga,id=video0,ram_size=67108864,vram_size=67108864,vram64_size_mb=64,vgamem_mb=64,max_outputs=1,bus=pcie.0 \
-  -device pcie-root-port,bus=pcie.0,multifunction=on,port=1,chassis=1,id=port.1
-  -device vfio-pci,host=04:00.0,bus=port.1,multifunction=on
-  -device vfio-pci,host=04:00.1,bus=port.1
-
-
-  
+ # Peter Spt 11, 2024 commented out
+ # -device qxl-vga,id=video0,ram_size=67108864,vram_size=67108864,vram64_size_mb=64,vgamem_mb=64,max_outputs=1,bus=pcie.0 \
+ # -device pcie-root-port,bus=pcie.0,multifunction=on,port=1,chassis=1,id=port.1
+ # -device vfio-pci,host=04:00.0,bus=port.1,multifunction=on
+ # -device vfio-pci,host=04:00.1,bus=port.1
+ # Peter Spt 11, 2024 end commented out
   # -device qxl-vga,id=video0,ram_size=67108864,vram_size=67108864,vram64_size_mb=0,vgamem_mb=16,max_outputs=1,bus=pcie.0 \
   # -device ich9-intel-hda,id=sound0,bus=pcie.0,addr=0x1b \
   # -device hda-duplex,id=sound0-codec0,bus=sound0.0,cad=0,audiodev=audio1 \
