@@ -56,12 +56,16 @@ args=(
   -device ich9-ahci,id=sata
   -drive id=OpenCoreBoot,if=none,snapshot=on,format=qcow2,file="$REPO_PATH/OpenCore/OpenCore.qcow2"
   -device ide-hd,bus=sata.2,drive=OpenCoreBoot
-  -device ide-hd,bus=sata.3,drive=InstallMedia
+  # -----------------------------------------------
+  # Re-enable this is recovering/installing Peter Oct 1, 2024
+  # -device ide-hd,bus=sata.3,drive=InstallMedia
+  # -----------------------------------------------
   -drive id=InstallMedia,if=none,file="$REPO_PATH/BaseSystem.img",format=raw
   -drive id=MacHDDNew,if=none,file="$REPO_PATH/mac_hdd_ng.img",format=qcow2
   # -drive id=PeterHDD,if=none,file="/mnt/apple/2023-12-10-Ventura/OSX-KVM/mac_hdd_ng.img",format=qcow2
   -device ide-hd,bus=sata.4,drive=MacHDDNew
   # -device ide-hd,bus=sata.5,drive=PeterHDD
+  # -device ide-hd,bus=sata.6,drive=pm-TimeMachine
   # --------------------------------------------------------------------------------
   # Peter - test img 
   # --------------------------------------------------------------------------------
@@ -71,14 +75,14 @@ args=(
   # end peter test
   # --------------------------------------------------------------------------------
   # Peter emily hdd
-  # -device ide-hd,bus=sata.5,drive=Spinning
-  # -drive id=Spinning,if=none,file="/dev/sda2",format=raw
+  -device ide-hd,bus=sata.5,drive=Spinning
+  -drive id=Spinning,if=none,file="/dev/sda2",format=raw
   # end emily hdd
   # --------------------------------------------------------------------------------
   # Peter Seagate usb hdd
-  # change to 6 if using emily
-  # -device ide-hd,bus=sata.5,drive=pm-TimeMachine
-  # -drive id=pm-TimeMachine,if=none,file="/dev/sdd1",format=raw
+  # change to 3 if using emily and check line 61 and comment out the InstallMedia line
+  -device ide-hd,bus=sata.3,drive=pmTimeMachine
+  -drive id=pmTimeMachine,if=none,file="/dev/sdd",format=raw
   # end Seagate usb hdd
   # --------------------------------------------------------------------------------
   # Peter sonoma tst
