@@ -200,7 +200,14 @@ args=(
   # <address type="usb" bus="0" port="8"/>
   # </hostdev>
   #################################################################################################################
-  #
+  # 001:003 Texas Instruments PCM2902 Audio Codec - the USB to the Xenyx QX1222 USB Mixer
+  # <hostdev mode="subsystem" type="usb" managed="yes">
+  # <source>
+  #   <vendor id="0x08bb"/>
+  #   <product id="0x2902"/>
+  # </source>
+  # <address type="usb" bus="0" port="9"/>
+  # </hostdev>
   #
   #
   #
