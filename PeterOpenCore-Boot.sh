@@ -53,8 +53,8 @@ args=(
   # -global nec-usb-xhci.msi=off
   # -global ICH9-LPC.acpi-pci-hotplug-with-bridge-support=off
   -device qemu-xhci,id=xhci
-  -global nec-usb-xhci.msi=on
-  -global ICH9-LPC.acpi-pci-hotplug-with-bridge-support=on
+  -global nec-usb-xhci.msi=off
+  -global ICH9-LPC.acpi-pci-hotplug-with-bridge-support=off
   # End Peter
   # -device usb-host,vendorid=0x8086,productid=0x0808  # 2 USD USB Sound Card
   # -device usb-host,vendorid=0x1b3f,productid=0x2008  # Another 2 USD USB Sound Card
