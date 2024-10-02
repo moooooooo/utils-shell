@@ -24,7 +24,8 @@ MY_OPTIONS="+ssse3,+sse4.2,+popcnt,+avx,+aes,+xsave,+xsaveopt,check"
 # This script works for Big Sur, Catalina, Mojave, and High Sierra. Tested with
 # macOS 10.15.6, macOS 10.14.6, and macOS 10.13.6.
 
-ALLOCATED_RAM="24576" # MiB
+# ALLOCATED_RAM="24576" # MiB
+ALLOCATED_RAM="16384" # MiB
 CPU_SOCKETS="1"
 CPU_CORES="8"
 CPU_THREADS="8"
@@ -37,21 +38,32 @@ args=(
   -enable-kvm -m "$ALLOCATED_RAM" -cpu Penryn,kvm=on,vendor=GenuineIntel,+invtsc,vmware-cpuid-freq=on,"$MY_OPTIONS"
   # -machine q35
   -machine ubuntu-q35
-  -usb -device usb-kbd -device usb-tablet
+  -usb 
+  -device usb-kbd 
+  -device usb-tablet
   -smp "$CPU_THREADS",cores="$CPU_CORES",sockets="$CPU_SOCKETS"
   # -device usb-ehci,id=ehci
   # -device usb-kbd,bus=ehci.0
   # -device usb-mouse,bus=ehci.0
   # -device nec-usb-xhci,id=xhci
-  -global nec-usb-xhci.msi=off
-  -global ICH9-LPC.acpi-pci-hotplug-with-bridge-support=off
+  # <controller type="usb" index="0" model="qemu-xhci" ports="15">
+  #    <address type="pci" domain="0x0000" bus="0x02" slot="0x00" function="0x0"/>
+  #  </controller>
+  #  Peter Oct 2
+  # -global nec-usb-xhci.msi=off
+  # -global ICH9-LPC.acpi-pci-hotplug-with-bridge-support=off
+  -device qemu-xhci,id=xhci
+  -global nec-usb-xhci.msi=on
+  -global ICH9-LPC.acpi-pci-hotplug-with-bridge-support=on
+  # End Peter
   # -device usb-host,vendorid=0x8086,productid=0x0808  # 2 USD USB Sound Card
   # -device usb-host,vendorid=0x1b3f,productid=0x2008  # Another 2 USD USB Sound Card
   -device usb-host,vendorid=0x1c75,productid=0x0219  # Arturia Keystep 37
   -device usb-host,vendorid=0xfc02,productid=0x0101  # USB MIDI plugged into H&K GMD40
+  -device usb-host,vendorid=0x08bb,productid=0x2902  # The mixer PCM2902
   -device usb-host,vendorid=0x1edb,productid=0xbe49  # ATEM Mini
-  -device usb-host,vendorid=0x046d,productid=0x085e  # Logitech BRIO
-  -device usb-host,vendorid=0x0fd9,productid=0x0060  # Elgato Stream Deck
+  # -device usb-host,vendorid=0x046d,productid=0x085e  # Logitech BRIO
+  # -device usb-host,vendorid=0x0fd9,productid=0x0060  # Elgato Stream Deck
 
 
 
