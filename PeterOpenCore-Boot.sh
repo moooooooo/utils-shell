@@ -47,6 +47,14 @@ args=(
   -global ICH9-LPC.acpi-pci-hotplug-with-bridge-support=off
   # -device usb-host,vendorid=0x8086,productid=0x0808  # 2 USD USB Sound Card
   # -device usb-host,vendorid=0x1b3f,productid=0x2008  # Another 2 USD USB Sound Card
+  -device usb-host,vendorid=0x1c75,productid=0x0219  # Arturia Keystep 37
+  -device usb-host,vendorid=0xfc02,productid=0x0101  # USB MIDI plugged into H&K GMD40
+  -device usb-host,vendorid=0x1edb,productid=0xbe49  # ATEM Mini
+  -device usb-host,vendorid=0x046d,productid=0x085e  # Logitech BRIO
+  -device usb-host,vendorid=0x0fd9,productid=0x0060  # Elgato Stream Deck
+
+
+
   -device isa-applesmc,osk="ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc"
   -drive if=pflash,format=raw,readonly=on,file="$REPO_PATH/$OVMF_DIR/OVMF_CODE.fd"
   -drive if=pflash,format=raw,file="$REPO_PATH/$OVMF_DIR/OVMF_VARS-1920x1080.fd"
@@ -67,21 +75,14 @@ args=(
   # -device ide-hd,bus=sata.5,drive=PeterHDD
   # -device ide-hd,bus=sata.6,drive=pm-TimeMachine
   # --------------------------------------------------------------------------------
-  # Peter - test img 
-  # --------------------------------------------------------------------------------
-  # change to 6 if using emily
-  # -drive id=MacHDDPtr,if=none,file="/home/peter/src/mac_hdd_peter.img",format=qcow2
-  # -device ide-hd,bus=sata.5,drive=MacHDDPtr
-  # end peter test
-  # --------------------------------------------------------------------------------
   # Peter emily hdd
-  -device ide-hd,bus=sata.5,drive=Spinning
-  -drive id=Spinning,if=none,file="/dev/sda2",format=raw
+  # -device ide-hd,bus=sata.5,drive=Spinning
+  # -drive id=Spinning,if=none,file="/dev/sda2",format=raw
   # end emily hdd
   # --------------------------------------------------------------------------------
   # Peter Seagate usb hdd
   # change to 3 if using emily and check line 61 and comment out the InstallMedia line
-  -device ide-hd,bus=sata.3,drive=pmTimeMachine
+  -device ide-hd,bus=sata.5,drive=pmTimeMachine
   -drive id=pmTimeMachine,if=none,file="/dev/sdd",format=raw
   # end Seagate usb hdd
   # --------------------------------------------------------------------------------
@@ -139,6 +140,60 @@ args=(
   # -device usb-redir,chardev=charredir1,id=redir1,bus=usb.0,port=3 \
   # -device vfio-pci,host=0000:04:00.0,id=hostdev0,bus=pci.5,addr=0x0 \
   # -device vfio-pci,host=0000:04:00.1,id=hostdev1,bus=pci.6,addr=0x0 \
+  #################################################################################################################
+  # USB devices in the ports i usually use them in, Go to Line 48 to use them                                     #
+  #################################################################################################################
+  # 003:007 Arturia KeyStep 37
+  # <hostdev mode="subsystem" type="usb" managed="yes">
+  # <source>
+  #   <vendor id="0x1c75"/>
+  #   <product id="0x0219"/>
+  # </source>
+  # <address type="usb" bus="0" port="4"/>
+  # </hostdev>
+  #################################################################################################################
+  # 003:002 0xfc02 USB MIDI Interface (plugged in to the H&K Grand Meister Deluxe 40)
+  # <hostdev mode="subsystem" type="usb" managed="yes">
+  # <source>
+  #   <vendor id="0xfc02"/>
+  #   <product id="0x0101"/>
+  # </source>
+  # <address type="usb" bus="0" port="5"/>
+  # </hostdev>
+  #################################################################################################################
+  # 005:002 Blackmagic Design - ATEM Mini
+  # <hostdev mode="subsystem" type="usb" managed="yes">
+  # <source>
+  #   <vendor id="0x1edb"/>
+  #   <product id="0xbe49"/>
+  # </source>
+  # <address type="usb" bus="0" port="6"/>
+  # </hostdev>
+  #################################################################################################################
+  # 005:004 Elgato Systems GmbH Stream Deck
+  # <hostdev mode="subsystem" type="usb" managed="yes">
+  # <source>
+  #   <vendor id="0x0fd9"/>
+  #   <product id="0x0060"/>
+  # </source>
+  # <address type="usb" bus="0" port="7"/>
+  # </hostdev>
+  #################################################################################################################
+  # 006:002 Logitech BRIO Ultra HD Webcam
+  # <hostdev mode="subsystem" type="usb" managed="yes">
+  # <source>
+  #   <vendor id="0x046d"/>
+  #   <product id="0x085e"/>
+  # </source>
+  # <address type="usb" bus="0" port="8"/>
+  # </hostdev>
+  #################################################################################################################
+  #
+  #
+  #
+  #
+  #
+  #################################################################################################################
 
 
 
