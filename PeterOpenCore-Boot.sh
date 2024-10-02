@@ -86,10 +86,7 @@ args=(
   # -----------------------------------------------
   -drive id=InstallMedia,if=none,file="$REPO_PATH/BaseSystem.img",format=raw
   -drive id=MacHDDNew,if=none,file="$REPO_PATH/mac_hdd_ng.img",format=qcow2
-  # -drive id=PeterHDD,if=none,file="/mnt/apple/2023-12-10-Ventura/OSX-KVM/mac_hdd_ng.img",format=qcow2
   -device ide-hd,bus=sata.4,drive=MacHDDNew
-  # -device ide-hd,bus=sata.5,drive=PeterHDD
-  # -device ide-hd,bus=sata.6,drive=pm-TimeMachine
   # --------------------------------------------------------------------------------
   # Peter emily hdd
   # -device ide-hd,bus=sata.5,drive=Spinning
@@ -97,17 +94,13 @@ args=(
   # end emily hdd
   # --------------------------------------------------------------------------------
   # Peter Seagate usb hdd
-  # change to 3 if using emily and check line 61 and comment out the InstallMedia line
+  # change if using emily and check line 61 and comment out the InstallMedia line
   -device ide-hd,bus=sata.5,drive=pmTimeMachine
   -drive id=pmTimeMachine,if=none,file="/dev/sdd",format=raw
   # end Seagate usb hdd
   # --------------------------------------------------------------------------------
-  # Peter sonoma tst
-  # -drive id=SonomaHDD,if=none,file="/mnt/apple/pm-sonoma.img",format=qcow2
-  # -device ide-hd,bus=sata.5,drive=SonomaHDD
-  # --------------------------------------------------------------------------------
   # Peter - Windows disk
-  # change to 6 if using emily
+  # change if using emily
   # -device ide-hd,bus=sata.5,drive=Windows
   # -drive id=Windows,if=none,file="/dev/sdc",format=raw
   # end Windows disk
