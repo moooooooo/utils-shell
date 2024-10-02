@@ -60,8 +60,12 @@ args=(
   # -device usb-host,vendorid=0x1b3f,productid=0x2008  # Another 2 USD USB Sound Card
   -device usb-host,vendorid=0x1c75,productid=0x0219  # Arturia Keystep 37
   -device usb-host,vendorid=0xfc02,productid=0x0101  # USB MIDI plugged into H&K GMD40
-  -device usb-host,vendorid=0x08bb,productid=0x2902  # The mixer PCM2902
-  -device usb-host,vendorid=0x1edb,productid=0xbe49  # ATEM Mini
+  -device usb-host,vendorid=0x08bb,productid=0x2902  # The mixer (Texas Instruments PCM2902)
+  # These are commented out because i actually use them in Linux and passing them through
+  # to the macOS Ventura VM will cause issues on the underlying Linux host.
+  # The mixer above is actually switched off in Linux as i'm using HDMI out for sound on Linux.
+  # The sound works fine in the macOS VM, but somethimes you have t select it which is fine.
+  # -device usb-host,vendorid=0x1edb,productid=0xbe49  # ATEM Mini
   # -device usb-host,vendorid=0x046d,productid=0x085e  # Logitech BRIO
   # -device usb-host,vendorid=0x0fd9,productid=0x0060  # Elgato Stream Deck
 
