@@ -7,13 +7,31 @@
 # https://github.com/Leoyzen/KVM-Opencore
 # https://github.com/thenickdude/KVM-Opencore/
 # https://github.com/qemu/qemu/blob/master/docs/usb2.txt
+# -------------------------------------------------------
+# Peter here.
+# read the following:
+# If you're using my script ? choose Ventura when you run PeterOpenCore-Boot.sh
+# If you're going to run the stock OpenCore-Boot-macOS.sh or OpenCore-Boot.sh ?
+# Try Sonoma - it may actually work.
+# I know i got it working once.
 #
 # after running fetch-macOS-v2.py, do the next 2
 #
 # dmg2img -i BaseSystem.dmg BaseSystem.img
 # qemu-img create -f qcow2 mac_hdd_ng.img 750G
 #
+# 750G is expected size you might go to. 
+#
+# Next used to be required - i haven't needed to, Peter
 # echo 1 > /sys/module/kvm/parameters/ignore_msrs (this is required)
+#  
+#  The rest of the settings are specific to me.
+#  Check the stock OpenCore-Boot-macOS.sh or OpenCore-Boot.sh 
+#  And use vindiff or VS Code and compare and experiment.
+#  email me peter.moore350@gmail.com email subject "macOS on qemu"
+#  i'll do my best.
+#  cheers
+#
 
 ############################################################################
 # NOTE: Tweak the "MY_OPTIONS" line in case you are having booting problems!
