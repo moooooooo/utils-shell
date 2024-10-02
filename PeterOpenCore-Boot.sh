@@ -10,7 +10,7 @@
 # -------------------------------------------------------
 # Peter here.
 # read the following:
-# If you're using my script ? choose Ventura when you run PeterOpenCore-Boot.sh
+# If you're using my script PeterOpenCore-Boot.sh ? choose Ventura when you run fetch-macOS-v2.py below
 # If you're going to run the stock OpenCore-Boot-macOS.sh or OpenCore-Boot.sh ?
 # Try Sonoma - it may actually work.
 # I know i got it working once.
