@@ -140,6 +140,10 @@ args=(
   #  -device vfio-pci,host=04:00.1,bus=port.1 \
   # -------------------------------------------------------------------------
    -vga qxl 
+#   qxl driver uses ram_size_mb, vram_size_mb, and vram64_size_mb
+#   Peter Oct 7, 2024 - next line didt seem to work but it didn't break anything
+#   maybe play around with removing id= and bus=
+  -device qxl,id=video0,ram_size=67108864,ram_size_mb=64,vram_size=67108864,vram64_size_mb=64,vgamem_mb=64,max_outputs=1,bus=pcie.0 
   #  -device pcie-root-port,bus=pcie.0,multifunction=on,port=1,chassis=1,id=port.1 \
   #  # -device vfio-pci,host=26:00.0,bus=port.1,multifunction=on,romfile=/path/to/card.rom \
   #  -device vfio-pci,host=18:00.0,bus=port.1,multifunction=on \
@@ -225,7 +229,44 @@ args=(
   #
   #
   #################################################################################################################
+  # You can get the list of the devices that is possible to add to the VM by running the following command (print a list of QEMU supported devices by category):
 
+# qemu-system-x86_64 -device help
+
+# Additionally, the options per device can be determined by running:
+
+# qemu-system-x86_64 -device device_name,help
+#################################################################################################################
+# qemu-system-x86_64 -device qxl,help
+# qxl options:
+#   acpi-index=<uint32>    -  (default: 0)
+#   addr=<int32>           - Slot and optional function number, example: 06.0 or 06 (default: -1)
+#   cmdlog=<uint32>        -  (default: 0)
+#   debug=<uint32>         -  (default: 0)
+#   failover_pair_id=<str>
+#   global-vmstate=<bool>  -  (default: false)
+#   guestdebug=<uint32>    -  (default: 0)
+#   max_outputs=<uint16>   -  (default: 0)
+#   multifunction=<bool>   - on/off (default: false)
+#   ram_size=<uint32>      -  (default: 67108864)
+#   ram_size_mb=<uint32>   -  (default: 4294967295)
+#   revision=<uint32>      -  (default: 5)
+#   rombar=<uint32>        -  (default: 1)
+#   romfile=<str>
+#   romsize=<uint32>       -  (default: 4294967295)
+#   surfaces=<int32>       -  (default: 1024)
+#   vgamem_mb=<uint32>     -  (default: 16)
+#   vram64_size_mb=<uint32> -  (default: 4294967295)
+#   vram_size=<uint64>     -  (default: 67108864)
+#   vram_size_mb=<uint32>  -  (default: 4294967295)
+#   x-pcie-ari-nextfn-1=<bool> - on/off (default: false)
+#   x-pcie-err-unc-mask=<bool> - on/off (default: true)
+#   x-pcie-extcap-init=<bool> - on/off (default: true)
+#   x-pcie-lnksta-dllla=<bool> - on/off (default: true)
+#   xres=<uint32>          -  (default: 0)
+#   yres=<uint32>          -  (default: 0)
+#
+#################################################################################################################
 
 
 
