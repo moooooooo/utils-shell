@@ -143,8 +143,9 @@ args=(
 #   qxl driver uses ram_size_mb, vram_size_mb, and vram64_size_mb
 #   Peter Oct 7, 2024 - next line didt seem to work but it didn't break anything
 #   maybe play around with removing id= and bus=
-  -device qxl,id=video0,ram_size=67108864,ram_size_mb=64,vram_size=67108864,vram64_size_mb=64,vgamem_mb=64,max_outputs=1,bus=pcie.0 
-  #  -device pcie-root-port,bus=pcie.0,multifunction=on,port=1,chassis=1,id=port.1 \
+  # -device qxl,id=video0,ram_size=67108864,ram_size_mb=64,vram_size=67108864,vram64_size_mb=64,vgamem_mb=64,max_outputs=1,bus=pcie.0 
+  -device qxl,id=video0,vgamem_mb=256
+  #  -device pcie-root-port,bus=pcie.0,multifunction=on,port=1,chassis=1,id=port.1 \vram64_size_mb=64
   #  # -device vfio-pci,host=26:00.0,bus=port.1,multifunction=on,romfile=/path/to/card.rom \
   #  -device vfio-pci,host=18:00.0,bus=port.1,multifunction=on \
   #  -device vfio-pci,host=18:00.1,bus=port.1 \
