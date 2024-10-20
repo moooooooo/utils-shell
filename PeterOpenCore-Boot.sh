@@ -100,7 +100,7 @@ args=(
   # -device ide-hd,bus=sata.3,drive=InstallMedia
   # -----------------------------------------------
   -drive id=InstallMedia,if=none,file="$REPO_PATH/BaseSystem.img",format=raw
-  -drive id=MacHDDNew,if=none,file="$REPO_PATH/mac_hdd_ng.img",format=qcow2
+  -drive id=MacHDDNew,if=none,file="$REPO_PATH/../mac_hdd_ng.img",format=qcow2
   -device ide-hd,bus=sata.4,drive=MacHDDNew
   # --------------------------------------------------------------------------------
   # Peter emily hdd
