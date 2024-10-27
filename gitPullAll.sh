@@ -5,11 +5,18 @@ BASEDIR=${HOME}/src/github
 BASEDIR2=${HOME}/go/src
 # echo "\nUpdating projects in ${BASEDIR}\n"
 BASEDIRS="$BASEDIR $BASEDIR2"
+DATE=`date`
+echo "+----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+--->"
+echo "                              Starting."
+echo "                              $DATE."
+echo "+----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+--->"
 
 for f in $(find -L ${BASEDIRS} -type d -name '\.git')
 do
     cd ${f}/..
     PWD=`pwd`
+    echo ""
+    echo "+----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+--->"
     echo "Updating $PWD..."
     REMOTES=`git remote`
     for r in $REMOTES; do
