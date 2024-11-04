@@ -24,3 +24,7 @@ alias dm="dmesg -T"
 alias q="cd $HOME/src/github/OSX-KVM"
 alias qq="cd $HOME/src/OSX/OSX-KVM"
 alias pp="rm $HOME/.config/pulse/*;pulseaudio -k;sudo alsa force-reload;sudo killall pulseaudio"
+alias sss='cd ~/src'
+alias ho="export PROMPT_COMMAND='${PROMPT_COMMAND}${PROMPT_COMMAND:+;}history -a; history -n'"
+alias hf="export PROMPT_COMMAND='setLastCommandState'"
+
