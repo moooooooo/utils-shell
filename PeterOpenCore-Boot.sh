@@ -39,8 +39,8 @@
 
 MY_OPTIONS="+ssse3,+sse4.2,+popcnt,+avx,+aes,+xsave,+xsaveopt,check"
 
-# ALLOCATED_RAM="24576" # MiB
-ALLOCATED_RAM="16384" # MiB
+ALLOCATED_RAM="24576" # MiB
+# ALLOCATED_RAM="16384" # MiB
 CPU_SOCKETS="1"
 CPU_CORES="8"
 CPU_THREADS="8"
@@ -76,6 +76,8 @@ args=(
   -device usb-host,vendorid=0x1c75,productid=0x0219  # Arturia Keystep 37
   -device usb-host,vendorid=0xfc02,productid=0x0101  # USB MIDI plugged into H&K GMD40
   -device usb-host,vendorid=0x08bb,productid=0x2902  # The mixer (Texas Instruments PCM2902)
+  -device usb-host,vendorid=0x05ac,productid=0x12a8  # iPhone plugged in to where the Arturia normally is
+
   # These are commented out because i actually use them in Linux and passing them through
   # to the macOS Ventura VM will cause issues on the underlying Linux host.
   # The mixer above is actually switched off in Linux as i'm using HDMI out for sound on Linux.
@@ -111,7 +113,7 @@ args=(
   # Peter Seagate usb hdd
   # change if using emily and check line 61 and comment out the InstallMedia line
   -device ide-hd,bus=sata.5,drive=pmTimeMachine
-  -drive id=pmTimeMachine,if=none,file="/dev/sdd",format=raw
+  -drive id=pmTimeMachine,if=none,file="/dev/sda",format=raw
   # end Seagate usb hdd
   # --------------------------------------------------------------------------------
   # Peter - Windows disk
@@ -171,6 +173,24 @@ args=(
   # -device vfio-pci,host=0000:04:00.1,id=hostdev1,bus=pci.6,addr=0x0 \
   #################################################################################################################
   # USB devices in the ports i usually use them in, Go to Line 48 to use them                                     #
+  # run "usbreset" with no arguments to get a list eg:
+  # 00:07 $ usbreset
+  # Usage:
+  #   usbreset PPPP:VVVV - reset by product and vendor id
+  #   usbreset BBB/DDD   - reset by bus and device number
+  #   usbreset "Product" - reset by product name
+  # 
+  # Devices:
+  #   Number 003/002  ID 048d:8297  ITE Device(8595)
+  #   Number 005/004  ID 0fd9:0060  Stream Deck
+  #   Number 003/004  ID 05ac:12a8  iPhone
+  #   Number 005/002  ID 1edb:be49  Blackmagic Design
+  #   Number 006/002  ID 046d:085e  Logitech BRIO
+  #   Number 001/002  ID 046d:c534  USB Receiver
+  #   Number 005/003  ID 0bc2:a0a4  Backup+ Desk
+  #   Number 003/003  ID fc02:0101  USB MIDI Interface
+  #   Number 001/003  ID 08bb:2902  USB Audio CODEC
+  # 
   #################################################################################################################
   # 003:007 Arturia KeyStep 37
   # <hostdev mode="subsystem" type="usb" managed="yes">
@@ -229,6 +249,14 @@ args=(
   #
   #
   #
+  #################################################################################################################
+  # Number 003/004  ID 05ac:12a8  iPhone
+  # <hostdev mode="subsystem" type="usb" managed="yes">
+  #   <source>
+  #     <vendor id="0x05ac"/>
+  #     <product id="0x12a8"/>
+  #   </source>
+  # </hostdev>
   #################################################################################################################
   # You can get the list of the devices that is possible to add to the VM by running the following command (print a list of QEMU supported devices by category):
 
