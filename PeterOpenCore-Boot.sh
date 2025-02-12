@@ -76,7 +76,7 @@ args=(
   -device usb-host,vendorid=0x1c75,productid=0x0219  # Arturia Keystep 37
   -device usb-host,vendorid=0xfc02,productid=0x0101  # USB MIDI plugged into H&K GMD40
   -device usb-host,vendorid=0x08bb,productid=0x2902  # The mixer (Texas Instruments PCM2902)
-  -device usb-host,vendorid=0x05ac,productid=0x12a8  # iPhone plugged in to where the Arturia normally is
+  # -device usb-host,vendorid=0x05ac,productid=0x12a8  # iPhone plugged in to where the Arturia normally is
 
   # These are commented out because i actually use them in Linux and passing them through
   # to the macOS Ventura VM will cause issues on the underlying Linux host.
@@ -113,7 +113,7 @@ args=(
   # Peter Seagate usb hdd
   # change if using emily and check line 61 and comment out the InstallMedia line
   -device ide-hd,bus=sata.5,drive=pmTimeMachine
-  -drive id=pmTimeMachine,if=none,file="/dev/sda",format=raw
+  -drive id=pmTimeMachine,if=none,file="/dev/sdd",format=raw
   # end Seagate usb hdd
   # --------------------------------------------------------------------------------
   # Peter - Windows disk
