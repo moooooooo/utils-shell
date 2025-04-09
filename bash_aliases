@@ -27,4 +27,4 @@ alias pp="rm $HOME/.config/pulse/*;pulseaudio -k;sudo alsa force-reload;sudo kil
 alias sss='cd ~/src'
 alias ho="export PROMPT_COMMAND='${PROMPT_COMMAND}${PROMPT_COMMAND:+;}history -a; history -n'"
 alias hf="export PROMPT_COMMAND='setLastCommandState'"
-
+alias res="res.sh"
