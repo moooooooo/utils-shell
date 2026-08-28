@@ -9,6 +9,6 @@ iptables -I INPUT -p udp --dport 53 -d $(nvram get lan_ipaddr) -m string --hex-s
 iptables -I FORWARD -p udp --dport 53 -m string --hex-string "|0000410001|" --algo bm -j REJECT
 #
 # to test, run:
-# iptables -nvL INPUT | grep 0000410001
+iptables -nvL INPUT | grep 0000410001
 
 
